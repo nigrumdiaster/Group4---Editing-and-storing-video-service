@@ -117,14 +117,14 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          if [ -d "Video-Proccessing-and-Storaging-Service_Nhom23_Detai15" ]; then
-            cd Video-Proccessing-and-Storaging-Service_Nhom23_Detai15
+          if [ -d "Group15-ServiceXuLyVaLuuTruVideo" ]; then
+            cd Group15-ServiceXuLyVaLuuTruVideo
             git pull https://github.com/Group15-ServiceXuLyVaLuuTruVideo/Group15-ServiceXuLyVaLuuTruVideo.git && \echo "Pull completed"
             cd ../
           else
             git clone https://github.com/Group15-ServiceXuLyVaLuuTruVideo/Group15-ServiceXuLyVaLuuTruVideo.git && \echo "Clone completed"
           fi
-          cd Video-Proccessing-and-Storaging-Service_Nhom23_Detai15/
+          cd Group15-ServiceXuLyVaLuuTruVideo/
           sudo apt-get update
           sudo apt-get install -y docker.io
           sudo systemctl start docker
