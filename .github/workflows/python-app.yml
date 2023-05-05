@@ -92,9 +92,11 @@ jobs:
       with:
         name: Test Report
         path: report.html
-  deploy:
-    name: Deploy to EC2
+  EC2-Deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name }}
+      url: ${{ steps.deploy.outputs.vm_url }}
     steps:
     - uses: actions/checkout@v2
     - name: SSH into EC2 instance + Deploy
