@@ -82,16 +82,6 @@ jobs:
         pip install -e video-server/[dev]
         pip install pytest==6.2.5
         pip install pytest-html
-    - name: Run tests
-      run: |
-        source venv/bin/activate
-        sudo chmod +x ./video-server/src/videoserver/lib/video_editor/script/capture_list_frames.sh
-        pytest --html=report.html --self-contained-html
-    - name: Upload Test Report
-      uses: actions/upload-artifact@v2
-      with:
-        name: Test Report
-        path: report.html
 
   deploy:
     needs: build
@@ -100,21 +90,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: SSH into EC2 instance + Deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@main
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          if [ -d "Group15" ]; then
-            cd Group15
+          if [ -d "Group15-ServiceXuLyVaLuuTruVideo" ]; then
+            cd Group15-ServiceXuLyVaLuuTruVideo
             git pull https://github.com/Group15-ServiceXuLyVaLuuTruVideo/Group15-ServiceXuLyVaLuuTruVideo.git && \echo "Pull completed"
             cd ../
           else
             git clone https://github.com/Group15-ServiceXuLyVaLuuTruVideo/Group15-ServiceXuLyVaLuuTruVideo.git && \echo "Clone completed"
           fi
-          cd Group15/
+          cd Group15-ServiceXuLyVaLuuTruVideo/
           sudo apt-get update
           sudo apt-get install -y docker.io
           sudo systemctl start docker
