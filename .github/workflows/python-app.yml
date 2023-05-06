@@ -94,7 +94,7 @@ jobs:
         path: report.html
 
   deploy:
-    needs: scan
+    needs: build
     name: Deploy to EC2
     runs-on: ubuntu-latest
     steps:
